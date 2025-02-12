@@ -33,100 +33,65 @@
         }
         p {
             font-size: 1.5rem;
-            margin: 0;
+            margin: 10px 0 20px;
         }
-        .tabs {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px;
-        }
-        .tab {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .tab:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo img {
-            width: 40px;
-            height: 40px;
-        }
-        .logo span {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        /* Styled Search Bar */
         .search-container {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 5px 15px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .search-box {
             width: 400px;
-        }
-        .search-container input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
             padding: 10px;
-            outline: none;
-        }
-        .search-container input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        .search-container button {
-            background: rgba(255, 255, 255, 0.3);
-            border: none;
-            color: white;
             font-size: 1.2rem;
-            padding: 10px 20px;
-            border-radius: 25px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .search-btn {
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            margin-left: 10px;
+            border-radius: 20px;
+            border: none;
             cursor: pointer;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
             transition: background 0.3s;
         }
-        .search-container button:hover {
+        .search-btn:hover {
             background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
-    <div class="logo" onclick="window.location.href='index.html';">
-        <img src="logo.png" alt="Interneting Logo">
-    </div>
-    <div class="tabs">
-        <div class="tab" onclick="window.location.href='games.html';">Games</div>
-        <div class="tab">Browser</div>
-        <div class="tab">Apps</div>
-        <div class="tab">Music</div>
-    </div>
     <div class="text-container">
         <h1>Interneting</h1>
         <p>Exploring the vast world of the web</p>
         <div class="search-container">
-            <input type="text" id="searchBar" placeholder="Search the web...">
-            <button onclick="search()">🔍</button>
+            <input type="text" id="searchInput" class="search-box" placeholder="Search the web...">
+            <button onclick="search()" class="search-btn">Search</button>
         </div>
     </div>
     <script>
+        function search() {
+            let query = document.getElementById("searchInput").value.trim();
+            if (query) {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+        document.getElementById("searchInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                search();
+            }
+        });
+
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -147,7 +112,6 @@
             update() {
                 this.x += this.dx;
                 this.y += this.dy;
-
                 if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
             }
@@ -184,15 +148,6 @@
             canvas.height = window.innerHeight;
             initParticles();
         });
-
-        function search() {
-            const query = document.getElementById("searchBar").value.trim();
-            if (query) {
-                const encodedQuery = encodeURIComponent(query);
-                const randomGibberish = Math.random().toString(36).substring(7);
-                window.location.href = `https://interneting.netlify.app/${encodedQuery}?${randomGibberish}`;
-            }
-        }
     </script>
 </body>
 </html>
