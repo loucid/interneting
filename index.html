@@ -69,21 +69,17 @@
             font-size: 1.5rem;
             font-weight: bold;
         }
-        .search-container {
-            margin-top: 30px;
-            z-index: 1;
+        .search-bar {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
         }
-        .search-input {
+        .search-bar input {
             padding: 10px;
-            font-size: 1.2rem;
-            border: 2px solid white;
+            font-size: 1rem;
             border-radius: 5px;
-            background: transparent;
-            color: white;
-            width: 400px;
-        }
-        .search-input:focus {
-            outline: none;
+            border: none;
+            width: 300px;
         }
     </style>
 </head>
@@ -104,35 +100,37 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="search-container">
-        <input class="search-input" type="text" id="searchBar" placeholder="Search the web..." onkeypress="handleSearch(event)">
+    <div class="search-bar">
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search..." />
+        </form>
     </div>
 
-<script>
-    function handleSearch(event) {
-        // Prevent form submission
-        event.preventDefault();
-        
-        // Get the query input from the search bar
-        const searchQuery = document.getElementById('searchInput').value.trim();
+    <script>
+        // Handle form submission and redirect to dynamic URL
+        function handleSearch(event) {
+            event.preventDefault(); // Prevent form submission
+            const searchQuery = document.getElementById('searchInput').value.trim();
 
-        // If the search input is not empty
-        if (searchQuery) {
-            // Redirect to a new dynamic URL (interneting.netlify.app?search=...)
-            window.location.href = `https://interneting.netlify.app?search=${encodeURIComponent(searchQuery)}`;
+            if (searchQuery) {
+                // Redirect to the dynamic URL (interneting.netlify.app?search=QUERY)
+                window.location.href = `https://interneting.netlify.app?search=${encodeURIComponent(searchQuery)}`;
+            }
         }
-    }
 
-    // Get query parameter from the URL and search on Google
-    window.onload = function() {
-        const params = new URLSearchParams(window.location.search);
-        const searchQuery = params.get('search');
+        // Handle page load and redirect to Google search if a search query exists
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const searchQuery = params.get('search');
 
-        if (searchQuery) {
-            // Construct the Google search URL and navigate there
-            window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-        }
-    }
-</script>
+            if (searchQuery) {
+                // Construct Google search URL and redirect to it
+                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+            }
+        };
+
+        // Add event listener to the search form to trigger handleSearch on submit
+        document.getElementById('searchForm').addEventListener('submit', handleSearch);
+    </script>
 </body>
 </html>
