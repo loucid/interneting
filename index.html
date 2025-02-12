@@ -174,8 +174,8 @@
                 if (query.length > 0) {
                     // Generate a unique ID for the dynamic URL
                     const uniqueID = Date.now();  // Using the current timestamp as the unique ID
-                    // Redirect to a dynamic URL (e.g., interneting/90982301983/)
-                    window.location.href = `interneting/${uniqueID}/?search=${encodeURIComponent(query)}`;
+                    // Redirect to a dynamic URL (e.g., interneting?search=90982301983)
+                    window.location.href = `interneting?search=${encodeURIComponent(query)}&id=${uniqueID}`;
                 }
             }
         }
