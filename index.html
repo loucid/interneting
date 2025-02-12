@@ -17,11 +17,13 @@
             height: 100vh;
             flex-direction: column;
             text-align: center;
+            position: relative;
         }
         canvas {
             position: absolute;
             top: 0;
             left: 0;
+            z-index: -1; /* Ensure particles are behind the content */
         }
         .text-container {
             position: relative;
@@ -70,16 +72,30 @@
             font-weight: bold;
         }
         .search-bar {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             justify-content: center;
+            width: 100%;
+            z-index: 1;
         }
         .search-bar input {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            width: 300px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            background-color: transparent;
+            color: white;
+            width: 50%;
+            max-width: 500px;
+            transition: all 0.3s ease;
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: #00bcd4;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+        }
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
@@ -131,6 +147,65 @@
 
         // Add event listener to the search form to trigger handleSearch on submit
         document.getElementById('searchForm').addEventListener('submit', handleSearch);
+
+        // Particle animation code
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 3 + 1;
+                this.dx = (Math.random() - 0.5) * 2;
+                this.dy = (Math.random() - 0.5) * 2;
+            }
+
+            update() {
+                this.x += this.dx;
+                this.y += this.dy;
+
+                if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
     </script>
 </body>
 </html>
