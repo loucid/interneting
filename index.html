@@ -105,7 +105,7 @@
 
     <!-- Search Bar -->
     <div class="search-container">
-        <input class="search-input" type="text" id="searchBar" placeholder="Search the web..." onkeyup="handleSearch(event)">
+        <input class="search-input" type="text" id="searchBar" placeholder="Search the web..." onkeypress="handleSearch(event)">
     </div>
 
     <script>
@@ -169,10 +169,14 @@
 
         // Handle Search
         function handleSearch(event) {
-            const query = event.target.value.trim();
-            if (query.length > 0) {
-                // Google Search with the custom theme
-                window.location.href = `https://www.google.com/search?q=${query}`;
+            if (event.key === 'Enter') {
+                const query = event.target.value.trim();
+                if (query.length > 0) {
+                    // Generate a unique ID for the dynamic URL
+                    const uniqueID = Date.now();  // Using the current timestamp as the unique ID
+                    // Redirect to a dynamic URL (e.g., interneting/90982301983/)
+                    window.location.href = `interneting/${uniqueID}/?search=${encodeURIComponent(query)}`;
+                }
             }
         }
     </script>
