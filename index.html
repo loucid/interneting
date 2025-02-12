@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,29 +19,35 @@
             flex-direction: column;
             text-align: center;
         }
+
         canvas {
             position: absolute;
             top: 0;
             left: 0;
         }
+
         .text-container {
             position: relative;
             z-index: 1;
         }
+
         h1 {
             font-size: 3rem;
             margin: 0;
         }
+
         p {
             font-size: 1.5rem;
             margin: 0;
         }
+
         .search-container {
             margin-top: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         input {
             padding: 10px;
             font-size: 1rem;
@@ -49,6 +56,7 @@
             border: none;
             outline: none;
         }
+
         button {
             padding: 10px 15px;
             font-size: 1rem;
@@ -59,9 +67,11 @@
             cursor: pointer;
             transition: 0.3s;
         }
+
         button:hover {
             background: gray;
         }
+
         iframe {
             width: 90vw;
             height: 80vh;
@@ -69,6 +79,7 @@
             display: none;
             margin-top: 20px;
         }
+
         .tabs {
             position: absolute;
             top: 20px;
@@ -76,6 +87,7 @@
             display: flex;
             gap: 15px;
         }
+
         .tab {
             background: rgba(255, 255, 255, 0.2);
             padding: 10px 20px;
@@ -83,9 +95,11 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
         .tab:hover {
             background: rgba(255, 255, 255, 0.4);
         }
+
         .logo {
             position: absolute;
             top: 20px;
@@ -95,24 +109,25 @@
             align-items: center;
             gap: 10px;
         }
+
         .logo img {
             width: 40px;
             height: 40px;
         }
+
         .logo span {
             font-size: 1.5rem;
             font-weight: bold;
         }
     </style>
 </head>
+
 <body>
     <canvas id="particleCanvas"></canvas>
 
     <div class="logo" onclick="window.location.href='index.html';">
         <img src="logo.png" alt="Interneting Logo">
-        <span>Interneting</span>
     </div>
-
     <div class="tabs">
         <div class="tab" onclick="window.location.href='games.html';">Games</div>
         <div class="tab">Browser</div>
@@ -189,25 +204,25 @@
         });
 
         // Search functionality
-function search() {
-    let query = document.getElementById("searchBar").value.trim();
-    if (query) {
-        let searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-        window.location.href = `?query=${encodeURIComponent(query)}&redirect=${encodeURIComponent(searchUrl)}`;
-    }
-}
+        function search() {
+            let query = document.getElementById("searchBar").value.trim();
+            if (query) {
+                let searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.location.href = `?query=${encodeURIComponent(query)}&redirect=${encodeURIComponent(searchUrl)}`;
+            }
+        }
 
-// Load search if URL has query
-window.onload = function() {
-    const params = new URLSearchParams(window.location.search);
-    const query = params.get('query');
-    const redirectUrl = params.get('redirect');
+        // Load search if URL has query
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('query');
+            const redirectUrl = params.get('redirect');
 
-    if (query && redirectUrl) {
-        window.location.href = redirectUrl; // Redirects to Google
-    }
-};
-
+            if (query && redirectUrl) {
+                window.location.href = redirectUrl; // Redirects to Google
+            }
+        };
     </script>
 </body>
+
 </html>
