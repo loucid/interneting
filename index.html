@@ -41,6 +41,7 @@
             right: 20px;
             display: flex;
             gap: 15px;
+            z-index: 2; /* Ensure the buttons are above other elements */
         }
         .tab {
             background: rgba(255, 255, 255, 0.2);
@@ -97,6 +98,8 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
+    
+    <!-- Logo and Navigation Tabs -->
     <div class="logo" onclick="window.location.href='index.html';">
         <img src="logo.png" alt="Interneting Logo">
     </div>
@@ -106,6 +109,8 @@
         <div class="tab" onclick="window.location.href='apps.html';">Apps</div>
         <div class="tab" onclick="window.location.href='music.html';">Music</div>
     </div>
+
+    <!-- Main Content -->
     <div class="text-container">
         <h1>Interneting</h1>
         <p>Exploring the vast world of the web</p>
@@ -115,12 +120,17 @@
         </div>
     </div>
 
-    <!-- The script should be placed here at the bottom of the body -->
+    <div id="searchResults" style="margin-top: 30px;"></div>
+
     <script>
         function search() {
             const query = document.getElementById('searchInput').value.trim();
             if (query) {
-                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+                // Search query is sent to Google as a custom URL
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+
+                // Open the Google search results in a new window/tab
+                window.open(searchUrl, "_blank");
             }
         }
 
