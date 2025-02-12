@@ -17,13 +17,11 @@
             height: 100vh;
             flex-direction: column;
             text-align: center;
-            position: relative;
         }
         canvas {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: -1;
         }
         .text-container {
             position: relative;
@@ -142,10 +140,6 @@
                 const randomGibberish = generateRandomGibberish();
                 const encodedSearchQuery = encodeURIComponent(searchQuery); // URL encode search term
                 const customUrl = `https://interneting.netlify.app/${encodedSearchQuery}?${randomGibberish}`;
-
-                // Open Google Search in a new window
-                const googleSearchUrl = `https://www.google.com/search?q=${encodedSearchQuery}`;
-                window.open(googleSearchUrl, '_blank');
 
                 // Redirect to the custom URL
                 window.location.href = customUrl;
