@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Custom Google Search</title>
     <style>
         body {
             margin: 0;
@@ -12,82 +12,65 @@
             color: white;
             font-family: Arial, sans-serif;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-        }
-        iframe {
-            width: 90%;
-            height: 80vh;
-            border: none;
-            background: white;
+            height: 100vh;
         }
         .search-container {
-            margin-bottom: 10px;
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .search-box {
-            width: 400px;
-            padding: 10px;
-            font-size: 1.2rem;
-            border-radius: 20px;
-            border: none;
-            outline: none;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.2);
+        .gcse-search {
+            margin-top: 50px;
+            width: 100%;
+        }
+        .gcse-searchresults {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .gsc-thumbnail img {
+            border-radius: 8px;
+            width: 100px;
+        }
+        .gsc-thumbnail-link {
+            text-decoration: none;
             color: white;
         }
-        .search-box::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        .search-btn {
-            padding: 10px 15px;
-            font-size: 1.2rem;
-            margin-left: 10px;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
+        .gsc-thumbnail-item {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            gap: 10px;
             transition: background 0.3s;
         }
-        .search-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
+        .gsc-thumbnail-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .gsc-webResult {
+            display: flex;
+            flex-direction: column;
+        }
+        .gsc-webResult a {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .gsc-webResult .gsc-snippet {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
         }
     </style>
+    <script async src="https://cse.google.com/cse.js?cx=44369c68153184d41"></script>
 </head>
 <body>
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search the web...">
-        <button onclick="search()" class="search-btn">Search</button>
+        <div class="gcse-search"></div>
+        <div class="gcse-searchresults"></div>
     </div>
-    <iframe id="searchFrame"></iframe>
-
-    <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        function search() {
-            let query = document.getElementById("searchInput").value.trim();
-            if (query) {
-                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
-            }
-        }
-
-        document.getElementById("searchInput").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                search();
-            }
-        });
-
-        let query = getQueryParam("q");
-        if (query) {
-            document.getElementById("searchInput").value = query;
-            document.getElementById("searchFrame").src = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-        }
-    </script>
 </body>
 </html>
