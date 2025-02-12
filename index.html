@@ -23,7 +23,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: -1; /* Ensure particles are behind the content */
+            z-index: -1;
         }
         .text-container {
             position: relative;
@@ -123,27 +123,34 @@
     </div>
 
     <script>
-        // Handle form submission and redirect to dynamic URL
+        // Function to generate random gibberish
+        function generateRandomGibberish() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let gibberish = '';
+            for (let i = 0; i < 10; i++) {
+                gibberish += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return gibberish;
+        }
+
+        // Handle form submission and redirect to custom URL
         function handleSearch(event) {
             event.preventDefault(); // Prevent form submission
             const searchQuery = document.getElementById('searchInput').value.trim();
 
             if (searchQuery) {
-                // Redirect to the dynamic URL (interneting.netlify.app?search=QUERY)
-                window.location.href = `https://interneting.netlify.app?search=${encodeURIComponent(searchQuery)}`;
+                const randomGibberish = generateRandomGibberish();
+                const encodedSearchQuery = encodeURIComponent(searchQuery); // URL encode search term
+                const customUrl = `https://interneting.netlify.app/${encodedSearchQuery}?${randomGibberish}`;
+
+                // Open Google Search in a new window
+                const googleSearchUrl = `https://www.google.com/search?q=${encodedSearchQuery}`;
+                window.open(googleSearchUrl, '_blank');
+
+                // Redirect to the custom URL
+                window.location.href = customUrl;
             }
         }
-
-        // Handle page load and redirect to Google search if a search query exists
-        window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            const searchQuery = params.get('search');
-
-            if (searchQuery) {
-                // Construct Google search URL and redirect to it
-                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-            }
-        };
 
         // Add event listener to the search form to trigger handleSearch on submit
         document.getElementById('searchForm').addEventListener('submit', handleSearch);
