@@ -99,7 +99,6 @@
     <canvas id="particleCanvas"></canvas>
     <div class="logo" onclick="window.location.href='index.html';">
         <img src="logo.png" alt="Interneting Logo">
-        <span>Interneting</span>
     </div>
     <div class="tabs">
         <div class="tab" onclick="window.location.href='games.html';">Games</div>
@@ -115,6 +114,8 @@
             <button class="search-button" onclick="search()">Search</button>
         </div>
     </div>
+
+    <!-- The script should be placed here at the bottom of the body -->
     <script>
         function search() {
             const query = document.getElementById('searchInput').value.trim();
@@ -129,6 +130,7 @@
             }
         });
 
+        // Particle animation script
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
