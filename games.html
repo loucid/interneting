@@ -69,6 +69,23 @@
             font-size: 1.5rem;
             font-weight: bold;
         }
+        .retro-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px; /* Reduced padding */
+            font-size: 1.2rem; /* Smaller font size */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .retro-button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .retro-button:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body>
@@ -85,6 +102,7 @@
     <div class="text-container">
         <h1>Games</h1>
         <p>Welcome to Interneting's Games.</p>
+        <button class="retro-button" onclick="openRetroBowl()">Play Retro Bowl</button>
     </div>
     <script>
         const canvas = document.getElementById('particleCanvas');
@@ -144,6 +162,13 @@
             canvas.height = window.innerHeight;
             initParticles();
         });
+
+        function openRetroBowl() {
+            const gameUrl = 'https://retro-bowl.com/';
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            window.open(gameUrl, '_blank', `width=${width},height=${height},fullscreen=yes`);
+        }
     </script>
 </body>
 </html>
