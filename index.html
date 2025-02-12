@@ -69,6 +69,22 @@
             font-size: 1.5rem;
             font-weight: bold;
         }
+        .search-container {
+            margin-top: 30px;
+            z-index: 1;
+        }
+        .search-input {
+            padding: 10px;
+            font-size: 1.2rem;
+            border: 2px solid white;
+            border-radius: 5px;
+            background: transparent;
+            color: white;
+            width: 400px;
+        }
+        .search-input:focus {
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -86,6 +102,12 @@
         <h1>Interneting</h1>
         <p>Exploring the vast world of the web</p>
     </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input class="search-input" type="text" id="searchBar" placeholder="Search the web..." onkeyup="handleSearch(event)">
+    </div>
+
     <script>
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
@@ -144,6 +166,15 @@
             canvas.height = window.innerHeight;
             initParticles();
         });
+
+        // Handle Search
+        function handleSearch(event) {
+            const query = event.target.value.trim();
+            if (query.length > 0) {
+                // Google Search with the custom theme
+                window.location.href = `https://www.google.com/search?q=${query}`;
+            }
+        }
     </script>
 </body>
 </html>
