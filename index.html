@@ -98,7 +98,7 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
-    
+
     <!-- Logo and Navigation Tabs -->
     <div class="logo" onclick="window.location.href='index.html';">
         <img src="logo.png" alt="Interneting Logo">
@@ -122,15 +122,16 @@
 
     <div id="searchResults" style="margin-top: 30px;"></div>
 
+    <!-- Include Ultraviolet Browser Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/ultraviolet/dist/ultraviolet.min.js"></script>
+
     <script>
         function search() {
             const query = document.getElementById('searchInput').value.trim();
             if (query) {
-                // Search query is sent to Google as a custom URL
-                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-
-                // Open the Google search results in a new window/tab
-                window.open(searchUrl, "_blank");
+                // Search query is handled by Ultraviolet browser
+                const uv = new UV(); // Initialize Ultraviolet browser
+                uv.open('https://duckduckgo.com/?q=' + encodeURIComponent(query)); // Use a search engine like DuckDuckGo
             }
         }
 
