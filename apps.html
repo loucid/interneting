@@ -1,0 +1,104 @@
+  <script>
+       var password = "interneting396503774892093497509"; // Set the password here
+       var userPassword = prompt("put the password in password to get somehwere!");
+
+
+       if (userPassword === password) {
+           document.body.style.display = "block"; // Show the main content if password is correct
+       } else {
+           alert("Incorrect password. Access denied.");
+           window.location.href = "about:blank"; // Redirect to blank page if password is wrong
+       }
+   </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Embedded Apps Section</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           background-color: #f4f4f4;
+           margin: 0;
+           padding: 0;
+       }
+       .apps-container {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           padding: 50px 20px;
+       }
+       .app-card {
+           background-color: white;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           margin: 20px;
+           width: 320px;
+           text-align: center;
+           overflow: hidden;
+           transition: transform 0.3s ease;
+       }
+       .app-card h3 {
+           margin: 10px 0;
+           font-size: 18px;
+           color: #333;
+       }
+       .app-card iframe {
+           width: 100%;
+           height: 200px;
+       }
+       .app-card a {
+           display: block;
+           background-color: #007BFF;
+           color: white;
+           padding: 10px;
+           text-decoration: none;
+           border-radius: 5px;
+           margin: 10px;
+       }
+       .app-card:hover {
+           transform: scale(1.05);
+       }
+       .app-card a:hover {
+           background-color: #0056b3;
+       }
+   </style>
+</head>
+<body>
+   <section id="apps" class="apps-container">
+       <!-- YouTube Embed -->
+       <div class="app-card">
+           <h3>YouTube</h3>
+           <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube Video"></iframe>
+           <a href="https://www.youtube.com" target="_blank">Visit YouTube</a>
+       </div>
+
+
+       <!-- Google Maps Embed -->
+       <div class="app-card">
+           <h3>Google Maps</h3>
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2394980736495!2d144.96315751536533!3d-37.81362797975128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4321b5d813%3A0x5045675218ce6e0!2zTGVnZW5kIFN0LCBMaWZldHN0b24sIERlY2t5LCBBdXN0cmFsaWE!5e0!3m2!1sen!2sus!4v1623308683881!5m2!1sen!2sus" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+           <a href="https://www.google.com/maps" target="_blank">Visit Google Maps</a>
+       </div>
+
+
+       <!-- Vimeo Embed -->
+       <div class="app-card">
+           <h3>Vimeo</h3>
+           <iframe src="https://player.vimeo.com/video/76979871?title=0&byline=0&portrait=0" width="100%" height="200" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+           <a href="https://www.vimeo.com" target="_blank">Visit Vimeo</a>
+       </div>
+
+
+       <!-- Twitter Embed -->
+       <div class="app-card">
+           <h3>Twitter</h3>
+           <iframe src="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw" width="100%" height="200" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+           <a href="https://twitter.com" target="_blank">Visit Twitter</a>
+       </div>
+
+
+   </section>
+</body>
+</html>
